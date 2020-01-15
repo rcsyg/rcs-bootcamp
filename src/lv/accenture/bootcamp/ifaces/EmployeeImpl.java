@@ -2,7 +2,7 @@ package lv.accenture.bootcamp.ifaces;
 
 import java.util.Random;
 
-public class EmployeeImpl implements Employee, Animal {
+public class EmployeeImpl implements Employee, Hobby {
 
     private String name;
 
@@ -27,5 +27,10 @@ public class EmployeeImpl implements Employee, Animal {
     @Override
     public void sleep() {
         System.out.println(name + " is sleeping");
+    }
+
+    @Override
+    public void spendTime() {
+        System.out.println("Spend some time on hobby");
     }
 }

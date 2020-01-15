@@ -1,6 +1,6 @@
 package lv.accenture.bootcamp.ifaces;
 
-public interface Employee {
+public interface Employee extends Animal {
 
     boolean work(int hours);
 
