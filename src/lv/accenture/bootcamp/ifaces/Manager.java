@@ -6,8 +6,6 @@ public class Manager extends EmployeeImpl {
 
     private List<Developer> workers;
 
-    private String name;
-
     public Manager(String name) {
         super(name);
     }
@@ -15,10 +13,6 @@ public class Manager extends EmployeeImpl {
     @Override
     public boolean work(int hours) {
         return hours <= 6;
-    }
-
-    public String getName() {
-        return name;
     }
 
     @Override

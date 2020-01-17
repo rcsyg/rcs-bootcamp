@@ -13,6 +13,11 @@ public class ZooLauncher {
         //domesticCat.groom();
 
         domesticCat.sleep();
+
+        LazyDomesticCat kakis = new LazyDomesticCat("Kakis");
+        System.out.println("kakis.getName() = " + kakis.getName());
+
+        System.out.println(kakis);
     }
 
 }

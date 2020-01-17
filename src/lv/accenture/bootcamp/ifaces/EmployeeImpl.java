@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class EmployeeImpl implements Employee, Hobby {
 
-    private String name;
+    protected String name;
 
     public EmployeeImpl (String name) {
         this.name = name;
