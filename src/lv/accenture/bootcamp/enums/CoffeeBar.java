@@ -14,7 +14,13 @@ public class CoffeeBar {
         CoffeeBar coffeeBar = new CoffeeBar();
         Cup cup = coffeeBar.new Cup(CupSize.MEDIUM);
 
-        System.out.println(cup.size + " : " + cup.size.getVolume());
+        String cupSizeName = cup.size.name();
+        System.out.println(cupSizeName);
+
+        int ordinal = CupSize.LARGE.ordinal();
+        System.out.println("ordinal = " + ordinal);
+
+        CupSize[] cupSizes = CupSize.values();
 
     }
 
