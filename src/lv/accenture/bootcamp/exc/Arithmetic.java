@@ -14,11 +14,16 @@ public class Arithmetic {
             /*int[] arr = new int[0];
             int some = arr[1];*/
 
-            "hello".charAt(100);
+            "hello".charAt(3);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Dont break array!");
         } catch (Exception ex) {
+            System.out.println("message : " + ex.getMessage());
             System.out.println("Generic Exception happened");
+
+            //ex.printStackTrace();
+        } finally {
+            System.out.println("Finally!");
         }
 
     }

@@ -12,6 +12,12 @@ public class Rectangle implements FlatFigure {
         this.b = b;
         this.c = c;
         this.d = d;
+
+        double acLength = new Elements.Line(a, c).length();
+        double bdLength = new Elements.Line(b, d).length();
+        if(acLength != bdLength) {
+            throw new UnCheckedGeometricException("Not a rectangle!");
+        }
     }
 
     @Override
