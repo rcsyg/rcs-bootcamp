@@ -22,6 +22,7 @@ public class GeometryLauncher {
             System.out.println("cylinder.volume() = " + cylinder.volume());
             System.out.println("cylinder.surfaceArea() = " + cylinder.surfaceArea());
         } catch (CheckedGeometricException e) {
+            //throw new RuntimeException("Failed to create cylinder : ", e);
             System.out.println("Failed to create cylinder : " + e.getMessage());
         }
 

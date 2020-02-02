@@ -13,7 +13,7 @@ public class Developer extends EmployeeImpl {
     @Override
     public boolean work(int hours) throws WorkException {
 
-        assert hours >= 0 : "Can't work negative amount of time";
+        assert hours >= 0 && hours <= 24 : "Can't work negative amount of time";
 
         if (hours > STANDARD_WORKING_DAY) {
             throw new WorkException("Too much work");
