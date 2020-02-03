@@ -10,30 +10,23 @@ public class OrderBatch {
 
     }
 
-    public void remove(String itemName) {
-        // Hint : use .iterator() approach
-    }
-
     public List<Order> sortByCustomer() {
-        List<Order> collectionToSort = new ArrayList<>(this.orders);
-
         // Implement sorting here
 
-        return collectionToSort;
+        return this.orders;
     }
 
     public List<Order> sortByItemId() {
-        List<Order> collectionToSort = new ArrayList<>(this.orders);
-
         // Implement sorting here
 
-        return collectionToSort;
+        return this.orders;
     }
 
     public List<Order> filter(String containingString) {
         List<Order> collectionCopy = new ArrayList<>(this.orders);
 
         // Implement filtering here
+        // Hint : use .iterator() approach
 
         return collectionCopy;
     }
@@ -41,7 +34,7 @@ public class OrderBatch {
     public List<Order> getCustomerOrders(String customerName) {
         List<Order> result = new ArrayList<>();
 
-        // Implement filtering here
+        // Implement extraction here
 
         return result;
     }

@@ -24,4 +24,20 @@ public class DomesticCat extends AbstractCat {
     public void groom() {
         System.out.println("Cat " + name + " is grooming");
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof DomesticCat) {
+            DomesticCat that = (DomesticCat) o;
+            return name.equals(that.name);
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "DomesticCat{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
