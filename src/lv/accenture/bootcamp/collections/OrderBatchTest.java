@@ -10,6 +10,7 @@ public class OrderBatchTest {
         orderBatch.addOrder(new Order("Xiaomi Redmi Note 8 Pro", "Vasya Pupkin", 1));
         orderBatch.addOrder(new Order("Blackview A80 Pro Quad 64GB", "Pupka Vasykin", 1));
         orderBatch.addOrder(new Order("Meizu C9 2GB 16GB", "SIA Accenture", 5));
+        orderBatch.addOrder(new Order("Nokia 3310", "Mr. Plyushkin", 2));
         orderBatch.addOrder(new Order("Global Version Xiaomi Mi A3", "Janis Berzinsh", 2));
         orderBatch.addOrder(new Order("Xiaomi Redmi Note 8 Pro", "Peteris Ozolinsh", 1));
         orderBatch.addOrder(new Order("Meizu C9 2GB 16GB", "Kumar Ranjeet", 1));
@@ -29,6 +30,9 @@ public class OrderBatchTest {
 
         customerOrders = orderBatch.getCustomerOrders("SIA Accenture");
         System.out.println("customerOrders (2) = " + customerOrders);
+
+        customerOrders = orderBatch.filter("Nokia");
+        System.out.println("Filtered orders = " + customerOrders);
 
         Map<String, Integer> mostPopularItems = orderBatch.getMostPopularItems(3);
         System.out.println("mostPopularItems = " + mostPopularItems);

@@ -30,6 +30,14 @@ public class OrderBatch {
         return collectionToSort;
     }
 
+    public List<Order> filter(String containingString) {
+        List<Order> collectionCopy = new ArrayList<>(this.orders);
+
+        // Implement filtering here
+
+        return collectionCopy;
+    }
+
     public List<Order> getCustomerOrders(String customerName) {
         List<Order> result = new ArrayList<>();
 
