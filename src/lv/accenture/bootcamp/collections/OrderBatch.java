@@ -23,12 +23,11 @@ public class OrderBatch {
     }
 
     public List<Order> filter(String containingString) {
-        List<Order> collectionCopy = new ArrayList<>(this.orders);
 
         // Implement filtering here
         // Hint : use .iterator() approach
 
-        return collectionCopy;
+        return this.orders;
     }
 
     public List<Order> getCustomerOrders(String customerName) {
