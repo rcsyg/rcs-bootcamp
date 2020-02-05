@@ -14,7 +14,7 @@ public class ZooLauncher {
 
         domesticCat.sleep();
 
-        LazyDomesticCat kakis = new LazyDomesticCat("Kakis");
+        LazyDomesticCat kakis = new LazyDomesticCat("Kakis", 1);
         System.out.println("kakis.getName() = " + kakis.getName());
 
         System.out.println(kakis);

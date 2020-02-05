@@ -1,8 +1,10 @@
 package lv.accenture.bootcamp.inheritance;
 
-public class DomesticCat extends AbstractCat {
+import java.util.Objects;
 
-    private String name;
+public class DomesticCat extends AbstractCat implements Comparable<DomesticCat> {
+
+    protected String name;
 
     public DomesticCat(String name) {
         this.name = name;
@@ -34,10 +36,19 @@ public class DomesticCat extends AbstractCat {
         return false;
     }
 
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
     @Override
     public String toString() {
         return "DomesticCat{" +
                 "name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(DomesticCat that) {
+        return this.name.compareTo(that.name);
     }
 }

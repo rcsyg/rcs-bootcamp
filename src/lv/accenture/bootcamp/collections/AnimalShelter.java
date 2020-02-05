@@ -2,8 +2,7 @@ package lv.accenture.bootcamp.collections;
 
 import lv.accenture.bootcamp.inheritance.DomesticCat;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class AnimalShelter {
 
@@ -28,6 +27,18 @@ public class AnimalShelter {
 
         System.out.println(prince == prince2);
         System.out.println(prince.equals(prince2));
+
+        Set<DomesticCat> domesticCatSet = new HashSet<>();
+        domesticCatSet.add(prince);
+        domesticCatSet.add(muris);
+        domesticCatSet.add(nikija);
+        domesticCatSet.add(prince2);
+
+        System.out.println("domesticCatSet = " + domesticCatSet);
+
+        Collections.sort(domesticCats);
+
+        System.out.println("domesticCats = " + domesticCats);
     }
 
 }
