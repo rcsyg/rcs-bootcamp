@@ -4,10 +4,10 @@ import java.util.*;
 
 public class OrderBatch {
 
-    private List<Order> orders = new ArrayList<>();
+    protected List<Order> orders = new ArrayList<>();
 
     public void addOrder(Order order) {
-
+        orders.add(order);
     }
 
     public List<Order> sortByCustomer() {
