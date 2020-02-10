@@ -18,7 +18,7 @@ public class OrderBatchTest {
         orderBatch.addOrder(new Order("Honor 9x Smart-Phone 64gb", "SIA Accenture", 3));
 
         List<Order> sortedByItemId = orderBatch.sortByItemId();
-        System.out.println("sortedBy ItemId = " + sortedByItemId);
+        System.err.println("sortedBy ItemId = " + sortedByItemId);
 
         List<Order> sortedByCustomer = orderBatch.sortByCustomer();
         System.out.println("sortedBy Customer = " + sortedByCustomer);

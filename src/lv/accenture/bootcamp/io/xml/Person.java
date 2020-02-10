@@ -1,0 +1,16 @@
+package lv.accenture.bootcamp.io.xml;
+
+public class Person {
+
+    private String name;
+    private String surname;
+    private int ageYears;
+    private DomesticAnimal domesticAnimal;
+
+    public Person(String name, String surname, int ageYears, DomesticAnimal domesticAnimal) {
+        this.name = name;
+        this.surname = surname;
+        this.ageYears = ageYears;
+        this.domesticAnimal = domesticAnimal;
+    }
+}
