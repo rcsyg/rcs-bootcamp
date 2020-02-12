@@ -14,6 +14,22 @@ public class Person {
         this.domesticAnimal = domesticAnimal;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public int getAgeYears() {
+        return ageYears;
+    }
+
+    public DomesticAnimal getDomesticAnimal() {
+        return domesticAnimal;
+    }
+
     @Override
     public String toString() {
         return "Person{" +

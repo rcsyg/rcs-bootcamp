@@ -25,6 +25,8 @@ public class PersonReader {
 
         Element ageElement = personElement.element("age");
         int age = Integer.parseInt(ageElement.getText());
+        String ageUnit = ageElement.attributeValue("unit");
+        System.out.println("ageUnit = " + ageUnit);
 
         Element domesticAnimalElement = personElement.element("domesticAnimal");
 
@@ -32,6 +34,15 @@ public class PersonReader {
         String hamsterName = domesticAnimalElement.element("name").getText();
 
         List<String> toys = new ArrayList<>();
+
+        Element toysElement = domesticAnimalElement.element("Toys");
+        List<Element> toysElementList = toysElement.elements("Toy");
+        if(toysElementList != null && toysElementList.size() > 0) {
+            for(Element toyElement : toysElementList) {
+                String toy = toyElement.getText();
+                toys.add(toy);
+            }
+        }
 
         DomesticAnimal domesticAnimal = new DomesticAnimal(animalType, hamsterName, toys);
         Person person = new Person(name, surname, age, domesticAnimal);

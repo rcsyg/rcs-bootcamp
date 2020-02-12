@@ -14,11 +14,24 @@ public class DomesticAnimal {
         this.toys = toys;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getToys() {
+        return toys;
+    }
+
     @Override
     public String toString() {
         return "DomesticAnimal{" +
                 "type='" + type + '\'' +
                 ", name='" + name + '\'' +
+                ", toys=" + toys +
                 '}';
     }
 }
