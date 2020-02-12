@@ -5,5 +5,10 @@
     <domesticAnimal>
         <type>Hamster</type>
         <name>Glutton</name>
+        <Toys>
+            <Toy>Ball</Toy>
+            <Toy>Running wheel</Toy>
+            <Toy>Tunnel</Toy>
+        </Toys>
     </domesticAnimal>
 </person>

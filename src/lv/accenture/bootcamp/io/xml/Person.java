@@ -13,4 +13,14 @@ public class Person {
         this.ageYears = ageYears;
         this.domesticAnimal = domesticAnimal;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", ageYears=" + ageYears +
+                ", domesticAnimal=" + domesticAnimal +
+                '}';
+    }
 }

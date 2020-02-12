@@ -1,11 +1,12 @@
 package lv.accenture.bootcamp.io.xml;
 
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonReader {
 
@@ -18,18 +19,24 @@ public class PersonReader {
         System.out.println("personXml = " + personXml);
 
         Element personElement = document.getRootElement();
-        Element surnameElement = personElement.element("surname");
-        String surname = surnameElement.getText();
-        System.out.println("surname = " + surname);
 
-        String hamsterName = personElement
-                .element("domesticAnimal")
-                .element("name").getText();
+        String name = personElement.element("name").getText();
+        String surname = personElement.element("surname").getText();
 
-        System.out.println("hamsterName = " + hamsterName);
+        Element ageElement = personElement.element("age");
+        int age = Integer.parseInt(ageElement.getText());
 
-        //Person person = new Person();
-        System.out.println("person = " + person);
+        Element domesticAnimalElement = personElement.element("domesticAnimal");
+
+        String animalType = domesticAnimalElement.element("type").getText();
+        String hamsterName = domesticAnimalElement.element("name").getText();
+
+        List<String> toys = new ArrayList<>();
+
+        DomesticAnimal domesticAnimal = new DomesticAnimal(animalType, hamsterName, toys);
+        Person person = new Person(name, surname, age, domesticAnimal);
+
+        System.out.println("\n\nperson = " + person);
     }
 
 }
