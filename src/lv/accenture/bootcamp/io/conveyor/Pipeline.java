@@ -14,8 +14,8 @@ public class Pipeline {
 
     public void performConversions() throws Exception {
         Course course = binaryConverter.readFromFile("students.data");
-        xmlConverter.writeToFile(course, "./documents/course.xml");
-        Course xmlCourse = xmlConverter.readFromFile("./documents/course.xml");
+        xmlConverter.writeToFile(course, "./documents/course-data.xml");
+        Course xmlCourse = xmlConverter.readFromFile("./documents/course-data.xml");
         System.out.println("xmlCourse = " + xmlCourse);
         // ./documents/students.xml
     }
