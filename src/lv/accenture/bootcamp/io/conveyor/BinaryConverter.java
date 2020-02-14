@@ -42,7 +42,6 @@ public class BinaryConverter implements Converter {
                 Lection dailyReport = new Lection(
                         date, presence, rawMark != -1 ? rawMark : null
                 );
-                dailyReport.setFormatter(new SimpleDateFormat(dateFormat));
                 dailyReports.add(dailyReport);
 
             }

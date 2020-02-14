@@ -19,6 +19,22 @@ public class Course {
         this.students = students;
     }
 
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public String getDateFormat() {
+        return dateFormat;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
     @Override
     public String toString() {
         return "Course{" +

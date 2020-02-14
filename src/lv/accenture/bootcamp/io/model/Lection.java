@@ -9,7 +9,6 @@ public class Lection {
     private Boolean presence;
 
     private Byte mark;
-    private SimpleDateFormat formatter;
 
     public Lection(Long date, Boolean presence, Byte mark) {
         this.date = date;
@@ -32,17 +31,10 @@ public class Lection {
     @Override
     public String toString() {
         return "\t\tLection{" +
-                "date=" + formatter.format(date) +
+                "date=" + date +
                 ", presence=" + presence +
                 ", mark=" + mark +
                 "}\n";
     }
 
-    public void setFormatter(SimpleDateFormat dateFormat) {
-        this.formatter = dateFormat;
-    }
-
-    public SimpleDateFormat getFormatter() {
-        return formatter;
-    }
 }
