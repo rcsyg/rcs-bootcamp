@@ -1,6 +1,7 @@
 package lv.accenture.bootcamp.io.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Course {
 
@@ -33,6 +34,22 @@ public class Course {
 
     public List<Student> getStudents() {
         return students;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return Objects.equals(courseName, course.courseName) &&
+                Objects.equals(teacher, course.teacher) &&
+                Objects.equals(dateFormat, course.dateFormat) &&
+                Objects.equals(students, course.students);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(courseName, teacher, dateFormat, students);
     }
 
     @Override

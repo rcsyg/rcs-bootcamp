@@ -6,6 +6,7 @@ import lv.accenture.bootcamp.io.model.Student;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
@@ -32,32 +33,30 @@ public class XMLConverter implements Converter {
         String title = courseElement.element("title").getText();
         String teacher = courseElement.element("teacher").getText();
 
-        Element studentsElement = courseElement.element("Students");
-        List<Element> studentsNodeList = studentsElement.elements("Student");
+        List<Node> studentsNodeList = courseElement.selectNodes("//Students/Student");
 
         List<Student> students = new ArrayList<>();
-        for (Element studentElement : studentsNodeList) {
-            String firstname = studentElement.element("firstname").getText();
-            String lastname = studentElement.element("lastname").getText();
-            String practiseCompany = studentElement.element("practiseCompany").getText();
+        for (Node studentElement : studentsNodeList) {
+            String firstname = studentElement.selectSingleNode("firstname").getText();
+            String lastname = studentElement.selectSingleNode("lastname").getText();
+            String practiseCompany = studentElement.selectSingleNode("practiseCompany").getText();
 
-            String ageString = studentElement.element("age").getText();
+            String ageString = studentElement.selectSingleNode("age").getText();
             byte age = Byte.parseByte(ageString);
 
-            Element lectionsElement = studentElement.element("Lections");
-            List<Element> lectionNodeList = lectionsElement.elements("Lection");
+             List<Node> lectionNodeList = studentElement.selectNodes("Lections/Lection");
 
             List<Lection> lections = new ArrayList<>();
-            for (Element lectionElement : lectionNodeList) {
+            for (Node lectionElement : lectionNodeList) {
 
-                String date = lectionElement.element("date").getText();
+                String date = lectionElement.selectSingleNode("date").getText();
                 Date parsedDate = simpleDateFormat.parse(date);
 
-                String present = lectionElement.element("present").getText();
+                String present = lectionElement.selectSingleNode("present").getText();
                 boolean presenceFact = Boolean.parseBoolean(present);
 
                 Byte markValue = null;
-                Element markElement = lectionElement.element("mark");
+                Node markElement = lectionElement.selectSingleNode("mark");
                 String markText = markElement.getText();
                 if(markText != null && !markText.equals("")) {
                     markValue = Byte.parseByte(markText);
@@ -117,5 +116,6 @@ public class XMLConverter implements Converter {
         OutputFormat format = OutputFormat.createPrettyPrint();
         XMLWriter writer = new XMLWriter(fileOutputStream, format);
         writer.write(document);
+        writer.close();
     }
 }

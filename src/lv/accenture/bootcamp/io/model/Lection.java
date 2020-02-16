@@ -1,6 +1,7 @@
 package lv.accenture.bootcamp.io.model;
 
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 public class Lection {
 
@@ -26,6 +27,21 @@ public class Lection {
 
     public Byte getMark() {
         return mark;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lection lection = (Lection) o;
+        return Objects.equals(date, lection.date) &&
+                Objects.equals(presence, lection.presence) &&
+                Objects.equals(mark, lection.mark);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, presence, mark);
     }
 
     @Override
