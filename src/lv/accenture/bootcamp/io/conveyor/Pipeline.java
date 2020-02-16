@@ -7,11 +7,13 @@ public class Pipeline {
     private BinaryConverter binaryConverter;
     private XMLConverter xmlConverter;
     private JSONConverter jsonConverter;
+    private DBConverter dbConverter;
 
     public Pipeline () {
         binaryConverter = new BinaryConverter();
         xmlConverter = new XMLConverter();
         jsonConverter = new JSONConverter();
+        dbConverter = new DBConverter();
     }
 
     public void performConversions() throws Exception {
@@ -25,6 +27,7 @@ public class Pipeline {
         Course jsonCourse = jsonConverter.readFromFile("./documents/course-json.json");
         assert course.equals(jsonCourse) : "JSON conversion step failed!";
 
+        dbConverter.writeToFile(jsonCourse, "./documents/course-id.txt");
     }
 
 
