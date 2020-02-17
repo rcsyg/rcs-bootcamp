@@ -8,12 +8,114 @@ import lv.accenture.bootcamp.io.model.Student;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DBConverter implements Converter {
 
     @Override
     public Course readFromFile(String path) throws Exception {
-        return null;
+        long courseId = Long.parseLong(Files.readString(Paths.get(path)));
+        Connection connection = null;
+        try {
+            connection = DBUtil.acquireConnection();
+
+            ResultSet courseResultSet = getCourseResultSet(courseId, connection);
+            String courseTitle = courseResultSet.getString(2);
+            String teacher = courseResultSet.getString(3);
+            String dateFormat = courseResultSet.getString(4);
+
+            ResultSet studentResultSet = getStudentResultSet(courseId, connection);
+
+            String studentIdBuilder = "";
+            List<Student> students = new ArrayList<>();
+            while (studentResultSet.next()) {
+                long studentId = studentResultSet.getLong(1);
+                studentIdBuilder += (studentId);
+                if(!studentResultSet.isLast()) {
+                    studentIdBuilder += ",";
+                }
+                Student student = createStudentFromRS(studentResultSet, studentId);
+                students.add(student);
+            }
+            studentResultSet.close();
+
+            Map<Long, List<Lection>> studentLections = new HashMap<>();
+            String lectionQuery = "select * from LECTION where COURSE_ID=" + courseId +
+                    " AND STUDENT_ID IN (" + studentIdBuilder + ")";
+            ResultSet lectionResultSet = connection.createStatement().executeQuery(lectionQuery);
+            while(lectionResultSet.next()) {
+                long lectionStudentId = lectionResultSet.getLong(3);
+                Lection lection = createLectionFromRS(lectionResultSet);
+                List<Lection> studentLectionList = studentLections.get(lectionStudentId);
+                if(studentLectionList != null) {
+                    studentLectionList.add(lection);
+                } else {
+                    studentLectionList = new ArrayList<>();
+                    studentLectionList.add(lection);
+                    studentLections.put(lectionStudentId, studentLectionList);
+                }
+            }
+            lectionResultSet.close();
+
+            for (Long studentId : studentLections.keySet()) {
+                List<Lection> lections = studentLections.get(studentId);
+                for (Student student : students) {
+                    if(student.getId().equals(studentId)) {
+                        student.setDailyReports(lections);
+                        break;
+                    }
+                }
+            }
+
+            courseResultSet.close();
+
+            return new Course(courseTitle, teacher, dateFormat, students);
+
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
+
+    private ResultSet getStudentResultSet(long courseId, Connection connection) throws SQLException {
+        String studentQuery = "Select * from STUDENT where ID in (select STUDENT_ID from COURSE_STUDENT where COURSE_ID = ?)";
+        PreparedStatement studentPreparedStatement = connection.prepareStatement(studentQuery);
+        studentPreparedStatement.setLong(1, courseId);
+        return studentPreparedStatement.executeQuery();
+    }
+
+    private ResultSet getCourseResultSet(long courseId, Connection connection) throws SQLException {
+        String courseQuery = "Select * from course where id = ?";
+        PreparedStatement coursePreparedStatement = connection.prepareStatement(courseQuery);
+        coursePreparedStatement.setLong(1, courseId);
+        ResultSet courseResultSet = coursePreparedStatement.executeQuery();
+        courseResultSet.next();
+        return courseResultSet;
+    }
+
+    private Student createStudentFromRS(ResultSet studentResultSet, long studentId) throws SQLException {
+        String firstName = studentResultSet.getString(2);
+        String lastName = studentResultSet.getString(3);
+        Byte age = studentResultSet.getByte(4);
+        String practiseCompany = studentResultSet.getString(5);
+
+        Student student = new Student(firstName, lastName, age, practiseCompany);
+        student.setId(studentId);
+        return student;
+    }
+
+    private Lection createLectionFromRS(ResultSet lectionResultSet) throws SQLException {
+        long lectionDate = lectionResultSet.getDate(4).getTime();
+        boolean isPresent = lectionResultSet.getBoolean(5);
+        Byte mark = lectionResultSet.getByte(6);
+        if(lectionResultSet.wasNull()) {
+            mark = null;
+        }
+        return new Lection(lectionDate, isPresent, mark);
     }
 
     @Override
@@ -86,7 +188,7 @@ public class DBConverter implements Converter {
         Timestamp timestamp = new Timestamp(lection.getDate());
         lectionInsertStatement.setTimestamp(3, timestamp);
         lectionInsertStatement.setBoolean(4, lection.getPresence());
-        if(lection.getMark() != null) {
+        if (lection.getMark() != null) {
             lectionInsertStatement.setByte(5, lection.getMark());
         } else {
             lectionInsertStatement.setNull(5, Types.TINYINT);
@@ -127,7 +229,7 @@ public class DBConverter implements Converter {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(connection != null) {
+            if (connection != null) {
                 connection.close();
             }
         }

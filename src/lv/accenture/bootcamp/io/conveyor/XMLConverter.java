@@ -65,7 +65,8 @@ public class XMLConverter implements Converter {
                 Lection lection = new Lection(parsedDate.getTime(), presenceFact, markValue);
                 lections.add(lection);
             }
-            Student student = new Student(firstname, lastname, age, practiseCompany, lections);
+            Student student = new Student(firstname, lastname, age, practiseCompany);
+            student.setDailyReports(lections);
             students.add(student);
         }
 

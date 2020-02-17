@@ -1,11 +1,11 @@
 package lv.accenture.bootcamp.io.model;
 
-import lv.accenture.bootcamp.io.model.Lection;
-
 import java.util.List;
 import java.util.Objects;
 
 public class Student {
+
+    private Long id;
 
     private String firstName;
 
@@ -17,12 +17,11 @@ public class Student {
 
     private List<Lection> dailyReports;
 
-    public Student(String firstName, String lastName, Byte age, String practiseCompany, List<Lection> dailyReports) {
+    public Student(String firstName, String lastName, Byte age, String practiseCompany) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.practiseCompany = practiseCompany;
-        this.dailyReports = dailyReports;
     }
 
     public String getFirstName() {
@@ -43,6 +42,18 @@ public class Student {
 
     public List<Lection> getDailyReports() {
         return dailyReports;
+    }
+
+    public void setDailyReports(List<Lection> dailyReports) {
+        this.dailyReports = dailyReports;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

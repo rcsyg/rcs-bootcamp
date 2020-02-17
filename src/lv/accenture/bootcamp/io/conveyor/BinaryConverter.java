@@ -46,7 +46,8 @@ public class BinaryConverter implements Converter {
 
             }
 
-            Student student = new Student(studentFirstName, studentLastName, studentAge, practiseCompany, dailyReports);
+            Student student = new Student(studentFirstName, studentLastName, studentAge, practiseCompany);
+            student.setDailyReports(dailyReports);
             students.add(student);
         }
 

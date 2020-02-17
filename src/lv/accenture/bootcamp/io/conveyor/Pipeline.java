@@ -28,6 +28,8 @@ public class Pipeline {
         assert course.equals(jsonCourse) : "JSON conversion step failed!";
 
         dbConverter.writeToFile(jsonCourse, "./documents/course-id.txt");
+        Course dbCourse = dbConverter.readFromFile("./documents/course-id.txt");
+        assert course.equals(dbCourse) : "DB conversion step failed!";
     }
 
 
