@@ -82,7 +82,7 @@ public class DBConverter implements Converter {
     }
 
     private ResultSet getStudentResultSet(long courseId, Connection connection) throws SQLException {
-        String studentQuery = "Select * from STUDENT where ID in (select STUDENT_ID from COURSE_STUDENT where COURSE_ID = ?)";
+        String studentQuery = "Select * from STUDENT where ID in (select STUDENT_ID from LECTION where COURSE_ID = ?)";
         PreparedStatement studentPreparedStatement = connection.prepareStatement(studentQuery);
         studentPreparedStatement.setLong(1, courseId);
         return studentPreparedStatement.executeQuery();
@@ -167,16 +167,7 @@ public class DBConverter implements Converter {
             }
         }
 
-        insertCourseStudentConnectionRecord(connection, courseId, studentId);
         return studentId;
-    }
-
-    private void insertCourseStudentConnectionRecord(Connection connection, Long courseId, Long studentId) throws SQLException {
-        String insertCourseStudentSQL = "insert into course_student(COURSE_ID, STUDENT_ID) values (?,?)";
-        PreparedStatement studentCourseInsertStatement = connection.prepareStatement(insertCourseStudentSQL);
-        studentCourseInsertStatement.setLong(1, courseId);
-        studentCourseInsertStatement.setLong(2, studentId);
-        studentCourseInsertStatement.executeUpdate();
     }
 
     private void insertLectionRecord(Connection connection, Long courseId, Long studentId, Lection lection) throws SQLException {
@@ -223,7 +214,6 @@ public class DBConverter implements Converter {
             connection = DBUtil.acquireConnection();
 
             connection.createStatement().executeUpdate("delete from lection");
-            connection.createStatement().executeUpdate("delete from course_student");
             connection.createStatement().executeUpdate("delete from student");
             connection.createStatement().executeUpdate("delete from course");
         } catch (Exception e) {
