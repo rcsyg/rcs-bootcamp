@@ -54,7 +54,35 @@ create table COMPANY_EMPLOYEE (
     FOREIGN KEY (PERSON_CODE) REFERENCES PERSON(CODE)
 )
 
-insert into company_employee(REG_NR, PERSON_CODE) values (40003584748, '010175-25345')
-insert into company_employee(REG_NR, PERSON_CODE) values (40203075442, '010175-25345')
+insert into company_employee(REG_NR, PERSON_CODE) values (40003584748, '030874-34534')
+insert into company_employee(REG_NR, PERSON_CODE) values (40203075442, '030874-34534')
 insert into company_employee(REG_NR, PERSON_CODE) values (40203075442, '041181-94856')
 insert into company_employee(REG_NR, PERSON_CODE) values (40003584748, '220783-45679')
+
+
+alter table person
+    add column address_fk int,
+    add foreign key (address_fk) references address(id)
+
+
+select person.* from person
+    join address on person.address_fk = address.id
+    where address.country = 'Latvia'
+
+select * from person where address_fk in (
+    select id from address where country = 'Latvia'
+)
+
+
+select * from person where code in (
+   select master_fk from domestic_animal
+)
+
+#select person.first_name, domestic_animal.nickname
+#    from person join domestic_animal
+#        on person.code = domestic_animal.master_fk
+
+
+select distinct person.*
+    from person join domestic_animal
+        on person.code = domestic_animal.master_fk

@@ -13,7 +13,6 @@ public class DBUtil {
     public static Connection acquireConnection() {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            connection.setAutoCommit(Boolean.TRUE);
             return connection;
         } catch (SQLException e) {
             e.printStackTrace();
