@@ -11,7 +11,7 @@ public class PersonDBLauncher {
         String allPersonSQL = "select * from person";
         ResultSet allPersons = statement.executeQuery(allPersonSQL);
         while(allPersons.next()) {
-            //printPerson(allPersons);
+            printPerson(allPersons);
         }
         allPersons.close();
 
@@ -25,7 +25,7 @@ public class PersonDBLauncher {
         statement = connection.createStatement();
         allPersons = statement.executeQuery(allAccentureEmployeesSQL);
         while(allPersons.next()) {
-            printPerson(allPersons);
+            //printPerson(allPersons);
         }
         allPersons.close();
 
@@ -41,7 +41,7 @@ public class PersonDBLauncher {
 
         allPersons = preparedStatement.executeQuery();
         while(allPersons.next()) {
-            printPerson(allPersons);
+            //printPerson(allPersons);
         }
         allPersons.close();
 
@@ -60,10 +60,13 @@ public class PersonDBLauncher {
         //long birthDateMsec = birthDate.getTime();
         boolean employed = allPersons.getBoolean("employed");
         int heightCm = allPersons.getInt("height");
-        Long addressId = allPersons.getLong("address_fk");
+
+        long addressId = allPersons.getLong("address_fk");
+        boolean addressIsNull = allPersons.wasNull();
+        String addr = addressIsNull ? "Bezpajumtieks" : String.valueOf(addressId);
 
         System.out.println(code + " | " + firstName + " | " + lastName + " | "
-                + birthDate + " | " + employed + " | " + heightCm);
+                + birthDate + " | " + employed + " | " + heightCm + " | " + addr);
 
     }
 
