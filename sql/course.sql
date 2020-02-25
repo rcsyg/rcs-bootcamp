@@ -1,3 +1,5 @@
+create database if not exists bootcamp
+
 create table COURSE (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     TITLE VARCHAR(255) NOT NULL,
