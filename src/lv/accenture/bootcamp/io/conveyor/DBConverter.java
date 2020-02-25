@@ -17,7 +17,8 @@ public class DBConverter implements Converter {
 
     @Override
     public Course readFromFile(String path) throws Exception {
-        long courseId = Long.parseLong(Files.readString(Paths.get(path)));
+        byte[] fileBytes = Files.readAllBytes(Paths.get(path));
+        long courseId = Long.parseLong(new String(fileBytes));
         Connection connection = null;
         try {
             connection = DBUtil.acquireConnection();
@@ -136,7 +137,7 @@ public class DBConverter implements Converter {
                 }
             }
 
-            Files.writeString(Paths.get(path), String.valueOf(courseId));
+            Files.write(Paths.get(path), String.valueOf(courseId).getBytes());
 
         } catch (Exception e) {
             e.printStackTrace();
