@@ -3,6 +3,7 @@ package lv.accenture.bootcamp.io.conveyor;
 import lv.accenture.bootcamp.io.model.Course;
 import lv.accenture.bootcamp.io.model.Lection;
 import lv.accenture.bootcamp.io.model.Student;
+import org.springframework.stereotype.Component;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component("BinaryConverter")
 public class BinaryConverter implements Converter {
 
     @Override

@@ -4,6 +4,7 @@ import lv.accenture.bootcamp.db.DBUtil;
 import lv.accenture.bootcamp.io.model.Course;
 import lv.accenture.bootcamp.io.model.Lection;
 import lv.accenture.bootcamp.io.model.Student;
+import org.springframework.stereotype.Component;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component("DBConverter")
 public class DBConverter implements Converter {
 
     @Override

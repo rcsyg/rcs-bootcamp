@@ -1,20 +1,28 @@
 package lv.accenture.bootcamp.io.conveyor;
 
 import lv.accenture.bootcamp.io.model.Course;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Pipeline {
 
-    private BinaryConverter binaryConverter;
-    private XMLConverter xmlConverter;
-    private JSONConverter jsonConverter;
-    private DBConverter dbConverter;
+    @Autowired
+    @Qualifier("BinaryConverter")
+    private Converter binaryConverter;
 
-    public Pipeline () {
-        binaryConverter = new BinaryConverter();
-        xmlConverter = new XMLConverter();
-        jsonConverter = new JSONConverter();
-        dbConverter = new DBConverter();
-    }
+    @Autowired
+    @Qualifier("XMLConverter")
+    private Converter xmlConverter;
+
+    @Autowired
+    @Qualifier("JSONConverter")
+    private Converter jsonConverter;
+
+    @Autowired
+    @Qualifier("DBConverter")
+    private Converter dbConverter;
 
     public void performConversions() throws Exception {
         Course course = binaryConverter.readFromFile("students.data");
@@ -30,12 +38,8 @@ public class Pipeline {
         dbConverter.writeToFile(jsonCourse, "./documents/course-id.txt");
         Course dbCourse = dbConverter.readFromFile("./documents/course-id.txt");
         assert course.equals(dbCourse) : "DB conversion step failed!";
-    }
 
-
-    public static void main(String[] args) throws Exception {
-        Pipeline pipeline = new Pipeline();
-        pipeline.performConversions();
+        System.out.println("Conversions complete!");
     }
 
 }

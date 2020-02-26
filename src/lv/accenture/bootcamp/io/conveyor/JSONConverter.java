@@ -3,12 +3,14 @@ package lv.accenture.bootcamp.io.conveyor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lv.accenture.bootcamp.io.model.Course;
+import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+@Component("JSONConverter")
 public class JSONConverter implements Converter {
 
     @Override
