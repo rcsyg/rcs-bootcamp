@@ -16,7 +16,7 @@ public class BookStore {
         Readable fictionBook = new Fiction("The Picture of Dorian Gray",
                 "A lot of text inside", multipleAuthors, "novel");
         Readable nonFictionBook = new NonFiction("Thinking, Fast and Slow", "Subj.",
-                Collections.singletonList("Daniel Kahneman"), new ArrayList<>(), "GTD");
+                Collections.singletonList("Daniel Kahneman"), new ArrayList<String>(), "GTD");
 
         System.out.println("journal = " + journal.describe());
         System.out.println("fictionBook = " + fictionBook.describe());

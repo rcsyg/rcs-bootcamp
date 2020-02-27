@@ -92,7 +92,7 @@ public class DBConverter implements Converter {
     }
 
     private ResultSet getCourseResultSet(long courseId, Connection connection) throws SQLException {
-        String courseQuery = "Select * from course where id = ?";
+        String courseQuery = "Select * from COURSE where ID = ?";
         PreparedStatement coursePreparedStatement = connection.prepareStatement(courseQuery);
         coursePreparedStatement.setLong(1, courseId);
         ResultSet courseResultSet = coursePreparedStatement.executeQuery();
@@ -153,7 +153,7 @@ public class DBConverter implements Converter {
 
     private Long insertStudentRecord(Connection connection, Long courseId, Student student) throws SQLException {
         Long studentId = null;
-        String insertStudentSql = "insert into student(FIRST_NAME, LAST_NAME, AGE, PRACTISE_COMPANY) values (?,?,?,?)";
+        String insertStudentSql = "insert into STUDENT(FIRST_NAME, LAST_NAME, AGE, PRACTISE_COMPANY) values (?,?,?,?)";
         PreparedStatement studentInsertStatement = connection.prepareStatement(
                 insertStudentSql, Statement.RETURN_GENERATED_KEYS);
         studentInsertStatement.setString(1, student.getFirstName());
@@ -174,7 +174,7 @@ public class DBConverter implements Converter {
     }
 
     private void insertLectionRecord(Connection connection, Long courseId, Long studentId, Lection lection) throws SQLException {
-        String insertLectionSQL = "insert into lection(COURSE_ID, STUDENT_ID, " +
+        String insertLectionSQL = "insert into LECTION(COURSE_ID, STUDENT_ID, " +
                 "LECTION_DTM, IS_PRESENT, MARK) values (?,?,?,?,?)";
         PreparedStatement lectionInsertStatement = connection.prepareStatement(insertLectionSQL);
         lectionInsertStatement.setLong(1, courseId);
@@ -193,7 +193,7 @@ public class DBConverter implements Converter {
 
     private Long insertCourseRecord(Course model, Connection connection) throws SQLException {
         Long courseId = null;
-        String sql = "insert into course(TITLE, TEACHER, DTF) values (?,?,?)";
+        String sql = "insert into COURSE(TITLE, TEACHER, DTF) values (?,?,?)";
         PreparedStatement statement = connection.prepareStatement(
                 sql, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, model.getCourseName());
@@ -216,9 +216,9 @@ public class DBConverter implements Converter {
         try {
             connection = DBUtil.acquireConnection();
 
-            connection.createStatement().executeUpdate("delete from lection");
-            connection.createStatement().executeUpdate("delete from student");
-            connection.createStatement().executeUpdate("delete from course");
+            connection.createStatement().executeUpdate("delete from LECTION");
+            connection.createStatement().executeUpdate("delete from STUDENT");
+            connection.createStatement().executeUpdate("delete from COURSE");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
